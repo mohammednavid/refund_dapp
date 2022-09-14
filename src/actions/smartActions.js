@@ -1,22 +1,27 @@
 import refundContract from "../utils/refundContract";
 import { getUserAddress } from "./web3Actions";
+import web3 from "../web3";
 
 export const sendRefund = async (tokenIds) => {
   const userAddress = await getUserAddress();
   await refundContract.methods
     .refund([tokenIds])
-    .send({ from: userAddress, gas: 2100000, gasPrice: 8000000000 });
+    .send({ from: userAddress, gas: 210000, gasPrice: 80000000 });
 };
 
 export const onPreSaleMint = async (quantity, proof) => {
   const userAddress = await getUserAddress();
-  await refundContract.methods
-    .preSaleMint(quantity, proof)
-    .send({ from: userAddress, gas: 2100000, gasPrice: 8000000000 });
+  await refundContract.methods.preSaleMint(quantity, proof).send({
+    from: userAddress,
+    value: web3.utils.toWei("0.01", "ether"),
+    gas: 210000,
+    gasPrice: 80000000,
+  });
 };
 export const onPublicSaleMint = async (quantity) => {
   const userAddress = await getUserAddress();
-  await refundContract.methods
-    .publicSaleMint(quantity)
-    .send({ from: userAddress, gas: 2100000, gasPrice: 8000000000 }); 
+  await refundContract.methods.publicSaleMint(quantity).send({
+    from: userAddress,
+    value: web3.utils.toWei("0.01", "ether"),
+  });
 };

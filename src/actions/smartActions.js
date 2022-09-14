@@ -18,5 +18,5 @@ export const onPublicSaleMint = async (quantity) => {
   const userAddress = await getUserAddress();
   await refundContract.methods
     .publicSaleMint(quantity)
-    .send({ from: userAddress, gas: 2100000, gasPrice: 8000000000 });
+    .send({ from: userAddress, gas: 2100000, gasPrice: 8000000000 }); 
 };

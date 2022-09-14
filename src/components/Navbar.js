@@ -38,8 +38,7 @@ const Navbar = () => {
       {isActive && (
         <p className="nav_address">
           {account?.slice(0, 7) + "..." + account?.slice(36, 42)}
-        </p>
-      )}
+        </p>)}
       <div className="nav_links">
         {!isActive ? (
           <a href="#" onClick={connect}>

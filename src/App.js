@@ -83,7 +83,7 @@ function App() {
               onChange={(e) => setProofInput(e.target.value)}
             />
           )}
-          <button type="submit" className="btn">
+          <button type="submit" disabled={!account} className="btn">
             MINT NFT
           </button>
         </form>
@@ -144,7 +144,7 @@ function App() {
               value={refundInput}
               onChange={(e) => setRefundInput(e.target.value)}
             />
-            <button type="submit" className="btn">
+            <button type="submit" disabled={!account} className="btn">
               Refund
             </button>
           </form>

@@ -16,9 +16,12 @@ export const MetaMaskProvider = ({ children }) => {
 
   // Init Loading
   useEffect(() => {
-    connect().then((val) => {
-      setIsLoading(false);
-    });
+    let result = localStorage.getItem("connected");
+    if (result !== "none") {
+      connect().then((val) => {
+        setIsLoading(false);
+      });
+    }
   }, []);
 
   // Check when App is Connected or Disconnected to MetaMask
@@ -39,6 +42,7 @@ export const MetaMaskProvider = ({ children }) => {
       await activate(injected).then(() => {
         setShouldDisable(false);
       });
+      localStorage.setItem("connected", "active");
     } catch (error) {
       console.log("Error on connecting: ", error);
     }
@@ -48,7 +52,9 @@ export const MetaMaskProvider = ({ children }) => {
   const disconnect = async () => {
     console.log("Disconnecting wallet from App...");
     try {
-      await deactivate();
+      localStorage.setItem("connected", "none");
+      deactivate();
+      setIsActive(false);
     } catch (error) {
       console.log("Error on disconnnect: ", error);
     }

@@ -6,7 +6,7 @@ export const sendRefund = async (tokenIds) => {
   const userAddress = await getUserAddress();
   await refundContract.methods
     .refund([tokenIds])
-    .send({ from: userAddress, gas: 21000});
+    .send({ from: userAddress, gas: 210000, gasPrice: 20000000000 });
 };
 
 export const onPreSaleMint = async (quantity, proof) => {
@@ -14,7 +14,8 @@ export const onPreSaleMint = async (quantity, proof) => {
   await refundContract.methods.preSaleMint(quantity, proof).send({
     from: userAddress,
     value: web3.utils.toWei("0.01", "ether") * quantity,
-    gas: 2100 * quantity,
+    gas: 210000 * quantity,
+    gasPrice: 20000000000,
   });
 };
 export const onPublicSaleMint = async (quantity) => {
@@ -22,6 +23,7 @@ export const onPublicSaleMint = async (quantity) => {
   await refundContract.methods.publicSaleMint(quantity).send({
     from: userAddress,
     value: web3.utils.toWei("0.01", "ether") * quantity,
-    gas: 2100 * quantity,
+    gas: 210000 * quantity,
+    gasPrice: 20000000000,
   });
 };
